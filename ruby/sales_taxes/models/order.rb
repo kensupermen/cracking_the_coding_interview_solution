@@ -1,8 +1,8 @@
 class Order
   attr_accessor :quantity, :product
 
-  BASIC_TAX = 0.05
-  IMPORT_TAX = 0.1
+  BASIC_TAX = 0.1
+  IMPORT_TAX = 0.05
 
 
   def initialize(product, quantity)
