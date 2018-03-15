@@ -1,5 +1,6 @@
 class SalesTaxes
   def make_order(orders)
+    puts '----------------'
     total = 0
     sales_tax = 0
 
