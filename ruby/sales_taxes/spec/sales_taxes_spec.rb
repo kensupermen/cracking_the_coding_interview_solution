@@ -10,9 +10,9 @@ RSpec.describe SalesTaxes do
   end
 
   context 'input 1' do
-    let(:product_1) { Product.new('book', 12.49) }
-    let(:product_2) { Product.new('music cd', 14.99) }
-    let(:product_3) { Product.new('chocolate bar', 0.85) }
+    let(:product_1) { Product.new(name: 'book', unit_price: 12.49, category: 'book') }
+    let(:product_2) { Product.new(name: 'music cd', unit_price: 14.99) }
+    let(:product_3) { Product.new(name: 'chocolate bar', unit_price: 0.85, category: 'food') }
 
     let(:order_item_1) { Order.new(product_1, 1) }
     let(:order_item_2) { Order.new(product_2, 1) }

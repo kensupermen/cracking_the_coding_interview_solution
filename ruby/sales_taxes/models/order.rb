@@ -11,20 +11,22 @@ class Order
   end
 
   def price
-    unit_price_with_tax * quantity
+    (unit_price_with_tax * quantity).round(2)
   end
 
   def unit_price_with_tax
-    product.unit_price + tax
+    (product.unit_price + tax).round(2)
   end
 
   def tax
     tax = 0
     # if product is not books, food, and medical products
-    # tax += product.unit_price * BASIC_TAX
+    unless product.category == 'book' || product.category == 'food' || product.category == 'medical'
+      tax += product.unit_price * BASIC_TAX 
+    end
 
     # if product has been imported
-    # tax += product.unit_price * IMPORT_TAX
+    tax += product.unit_price * IMPORT_TAX if product.is_import == true
     tax
   end
 end
