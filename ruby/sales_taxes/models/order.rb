@@ -1,32 +1,15 @@
 class Order
-  attr_accessor :quantity, :product
+  attr_accessor :total_price, :sales_taxes, :order_details
 
-  BASIC_TAX = 0.1
-  IMPORT_TAX = 0.05
-
-
-  def initialize(product, quantity)
-    @product = product
-    @quantity = quantity
+  def initialize
+    @order_details = []
+    @total_price = 0
+    @sales_taxes = 0
   end
 
-  def price
-    (unit_price_with_tax * quantity).round(2)
-  end
-
-  def unit_price_with_tax
-    (product.unit_price + tax).round(2)
-  end
-
-  def tax
-    tax = 0
-    # if product is not books, food, and medical products
-    unless product.category == 'book' || product.category == 'food' || product.category == 'medical'
-      tax += product.unit_price * BASIC_TAX 
-    end
-
-    # if product has been imported
-    tax += product.unit_price * IMPORT_TAX if product.is_import == true
-    tax
+  def add(order_detail)
+    @order_details << order_detail
+    @total_price += order_detail.price.round(2)
+    @sales_taxes +=  order_detail.tax.round(2)
   end
 end

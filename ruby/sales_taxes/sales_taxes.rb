@@ -1,21 +1,29 @@
+require './models/order.rb'
 class SalesTaxes
-  def make_order(orders)
-    puts '----------------'
-    total = 0
-    sales_tax = 0
 
-    orders.each do |order|
-      product = order.product
-      total += order.price
-      sales_tax += order.tax
-
-      puts "#{order.quantity}, #{product.name}, #{order.unit_price_with_tax}"
+  def make_order(order_details)
+    order = Order.new
+    
+    order_details.each do |order_detail|
+      order.add order_detail
     end
 
-    total = total.round(2)
-    sales_tax = sales_tax.round(2)
+    output_stdout(order)
+    order
+  end
 
-    puts "Sales Taxes: #{sales_tax}"
-    puts "Total: #{total}"
+  private
+  def output_stdout(order)
+    puts '----------------'
+
+    order_details = order.order_details
+
+    order_details.each do |order_detail|
+      product = order_detail.product
+      puts "#{order_detail.quantity}, #{product.name}, #{format("%.2f", order_detail.unit_price_with_tax)}"
+    end
+
+    puts "Sales Taxes: #{format("%.2f", order.sales_taxes)}"
+    puts "Total: #{format("%.2f", order.total_price)}"
   end
 end
